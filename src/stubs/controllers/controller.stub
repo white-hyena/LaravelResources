@@ -4,9 +4,11 @@ namespace {{NAMESPACE}};
 
 use {{MODEL_NAMESPACE}};
 use {{RESOURCE_NAMESPACE}};
-use App\Http\Controllers\Controller;
 use {{REQUEST_NAMESPACE}};
 use {{RESOURCE_COLLECTION_NAMESPACE}};
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 
 class {{CONTROLLER_NAME}} extends Controller
 {
@@ -14,8 +16,9 @@ class {{CONTROLLER_NAME}} extends Controller
      * Display a listing of the resource.
      *
      * @return {{RESOURCE_COLLECTION_NAMESPACE}}
+     * @throws AuthorizationException
      */
-    public function index()
+    public function index(): {{RESOURCE_COLLECTION_NAMESPACE}}
     {
         $this->authorize('viewAny', {{MODEL_CLASS}}::class);
 
@@ -27,8 +30,9 @@ class {{CONTROLLER_NAME}} extends Controller
      *
      * @param  \{{REQUEST_NAMESPACE}}  $request
      * @return \{{RESOURCE_NAMESPACE}}
+     * @throws AuthorizationException
      */
-    public function store({{REQUEST_CLASS}} $request)
+    public function store({{REQUEST_CLASS}} $request): \{{RESOURCE_NAMESPACE}}
     {
         $this->authorize('create', {{MODEL_CLASS}}::class);
 
@@ -40,8 +44,9 @@ class {{CONTROLLER_NAME}} extends Controller
      *
      * @param  \{{MODEL_NAMESPACE}}  ${{MODEL_VARIABLE}}
      * @return \{{RESOURCE_NAMESPACE}}
+     * @throws AuthorizationException
      */
-    public function show({{MODEL_CLASS}} ${{MODEL_VARIABLE}})
+    public function show({{MODEL_CLASS}} ${{MODEL_VARIABLE}}): \{{RESOURCE_NAMESPACE}}
     {
         $this->authorize('view', ${{MODEL_VARIABLE}});
 
@@ -54,8 +59,9 @@ class {{CONTROLLER_NAME}} extends Controller
      * @param  \{{REQUEST_NAMESPACE}}  $request
      * @param  \{{MODEL_NAMESPACE}}  ${{MODEL_VARIABLE}}
      * @return \{{RESOURCE_NAMESPACE}}
+     * @throws AuthorizationException
      */
-    public function update({{REQUEST_CLASS}} $request, {{MODEL_CLASS}} ${{MODEL_VARIABLE}})
+    public function update({{REQUEST_CLASS}} $request, {{MODEL_CLASS}} ${{MODEL_VARIABLE}}): \{{RESOURCE_NAMESPACE}}
     {
         $this->authorize('update', ${{MODEL_VARIABLE}});
 
@@ -66,9 +72,11 @@ class {{CONTROLLER_NAME}} extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \{{MODEL_NAMESPACE}}  ${{MODEL_VARIABLE}}
-     * @return \{{RESOURCE_NAMESPACE}}
+     * @return JsonResponse
+     * @throws AuthorizationException
+     * @throws Exception
      */
-    public function destroy({{MODEL_CLASS}} ${{MODEL_VARIABLE}})
+    public function destroy({{MODEL_CLASS}} ${{MODEL_VARIABLE}}): JsonResponse
     {
         $this->authorize('delete', ${{MODEL_VARIABLE}});
 
