@@ -37,8 +37,6 @@ class {{CONTROLLER_NAME}} extends Controller
      */
     public function store({{REQUEST_CLASS}} $request): {{RESOURCE_NAME}}
     {
-        $this->authorize('create', {{MODEL_CLASS}}::class);
-
         {{STORE_METHOD}}
     }
 
