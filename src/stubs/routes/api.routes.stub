@@ -1,2 +1,2 @@
 /* {{MODEL_NAME}} endpoints */
-        Route::apiResource('{{{MODEL_VARIABLE}}}', '{{CONTROLLER_NAME}}');
+        Route::apiResource('{{ROUTE_NAME}}', '{{CONTROLLER_NAME}}');
