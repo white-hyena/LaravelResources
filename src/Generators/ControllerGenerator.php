@@ -50,6 +50,8 @@ class ControllerGenerator implements Generator
                 '{{RESOURCE_NAMESPACE}}' => config('laravel-resources.resources.namespace').'\\'.create_class_name($this->model, ResourceGenerator::class),
                 '{{RESOURCE_COLLECTION_NAMESPACE}}' => config('laravel-resources.collections.namespace').'\\'.create_class_name($this->model, CollectionGenerator::class),
                 '{{MODEL_CLASS}}' => "{$this->model}",
+                '{{COLLECTION_NAME}}' => create_class_name($this->model, CollectionGenerator::class),
+                '{{RESOURCE_NAME}}' => create_class_name($this->model, ResourceGenerator::class),
             ],
             $this->modelReplacements(),
             $this->requestReplacements(),

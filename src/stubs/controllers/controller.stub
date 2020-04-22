@@ -22,9 +22,9 @@ class {{CONTROLLER_NAME}} extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return {{RESOURCE_NAME}}
+     * @return {{COLLECTION_NAME}}
      */
-    public function index(): {{RESOURCE_NAME}}
+    public function index(): {{COLLECTION_NAME}}
     {
         {{INDEX_METHOD}}
     }
