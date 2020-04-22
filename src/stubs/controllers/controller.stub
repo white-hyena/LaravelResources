@@ -7,32 +7,35 @@ use {{RESOURCE_NAMESPACE}};
 use {{REQUEST_NAMESPACE}};
 use {{RESOURCE_COLLECTION_NAMESPACE}};
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
 class {{CONTROLLER_NAME}} extends Controller
 {
     /**
+     * {{CONTROLLER_NAME}} constructor.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource({{MODEL_CLASS}}::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return {{RESOURCE_COLLECTION_NAMESPACE}}
-     * @throws AuthorizationException
+     * @return {{RESOURCE_NAME}}
      */
-    public function index(): {{RESOURCE_COLLECTION_NAMESPACE}}
+    public function index(): {{RESOURCE_NAME}}
     {
-        $this->authorize('viewAny', {{MODEL_CLASS}}::class);
-
         {{INDEX_METHOD}}
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \{{REQUEST_NAMESPACE}}  $request
-     * @return \{{RESOURCE_NAMESPACE}}
-     * @throws AuthorizationException
+     * @param  {{REQUEST_CLASS}}  $request
+     * @return {{RESOURCE_NAME}}
      */
-    public function store({{REQUEST_CLASS}} $request): \{{RESOURCE_NAMESPACE}}
+    public function store({{REQUEST_CLASS}} $request): {{RESOURCE_NAME}}
     {
         $this->authorize('create', {{MODEL_CLASS}}::class);
 
@@ -42,44 +45,35 @@ class {{CONTROLLER_NAME}} extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \{{MODEL_NAMESPACE}}  ${{MODEL_VARIABLE}}
-     * @return \{{RESOURCE_NAMESPACE}}
-     * @throws AuthorizationException
+     * @param  {{MODEL_CLASS}}  ${{MODEL_VARIABLE}}
+     * @return {{RESOURCE_NAME}}
      */
-    public function show({{MODEL_CLASS}} ${{MODEL_VARIABLE}}): \{{RESOURCE_NAMESPACE}}
+    public function show({{MODEL_CLASS}} ${{MODEL_VARIABLE}}): {{RESOURCE_NAME}}
     {
-        $this->authorize('view', ${{MODEL_VARIABLE}});
-
         {{SHOW_METHOD}}
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \{{REQUEST_NAMESPACE}}  $request
-     * @param  \{{MODEL_NAMESPACE}}  ${{MODEL_VARIABLE}}
-     * @return \{{RESOURCE_NAMESPACE}}
-     * @throws AuthorizationException
+     * @param  {{REQUEST_CLASS}}  $request
+     * @param  {{MODEL_CLASS}}  ${{MODEL_VARIABLE}}
+     * @return {{RESOURCE_NAME}}
      */
-    public function update({{REQUEST_CLASS}} $request, {{MODEL_CLASS}} ${{MODEL_VARIABLE}}): \{{RESOURCE_NAMESPACE}}
+    public function update({{REQUEST_CLASS}} $request, {{MODEL_CLASS}} ${{MODEL_VARIABLE}}): {{RESOURCE_NAME}}
     {
-        $this->authorize('update', ${{MODEL_VARIABLE}});
-
         {{UPDATE_METHOD}}
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \{{MODEL_NAMESPACE}}  ${{MODEL_VARIABLE}}
+     * @param  {{MODEL_CLASS}}  ${{MODEL_VARIABLE}}
      * @return JsonResponse
-     * @throws AuthorizationException
      * @throws Exception
      */
     public function destroy({{MODEL_CLASS}} ${{MODEL_VARIABLE}}): JsonResponse
     {
-        $this->authorize('delete', ${{MODEL_VARIABLE}});
-
         {{DESTROY_METHOD}}
     }
 }
